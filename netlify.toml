@@ -3,9 +3,6 @@
   publish = "build"
   functions = "netlify/functions"
 
-[functions]
-  node_bundler = "esbuild"
-
 [dev]
   command = "npm start"
   targetPort = 3000
