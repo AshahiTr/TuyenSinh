@@ -1,0 +1,45 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  command = "npm start"
+  port = 8888
+  targetPort = 3000
+  quiet = true
+
+# API routes → Netlify Functions
+[[redirects]]
+  from = "/api/auth/*"
+  to = "/.netlify/functions/auth/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/upload"
+  to = "/.netlify/functions/upload"
+  status = 200
+
+[[redirects]]
+  from = "/api/files/*"
+  to = "/.netlify/functions/files/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/applications/*"
+  to = "/.netlify/functions/applications/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/applications"
+  to = "/.netlify/functions/applications"
+  status = 200
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

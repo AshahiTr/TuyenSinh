@@ -22,7 +22,10 @@ export interface SubjectGroup {
 
 const MOCK_UNIVERSITIES: University[] = universityData as University[];
 
-const BASE_URL = 'http://localhost:5000/api';
+// Sử dụng đường dẫn tương đối để hoạt động cả trên local lẫn Netlify.
+// Trên local với `netlify dev`: proxy qua /.netlify/functions/...
+// Trên Netlify production: redirect rules trong netlify.toml chuyển /api/* → functions
+const BASE_URL = '/api';
 
 export const api = {
   async getUniversities(): Promise<University[]> {
@@ -71,7 +74,7 @@ export const api = {
     return response.json();
   },
 
-  // Upload file lên MongoDB Atlas qua Backend
+  // Upload file lên MongoDB Atlas qua Netlify Function
   async uploadFile(file: File): Promise<any> {
     const formData = new FormData();
     formData.append('file', file);
