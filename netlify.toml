@@ -8,14 +8,17 @@
 
 [dev]
   command = "npm start"
-  port = 8888
   targetPort = 3000
-  quiet = true
+  port = 8888
 
-# API routes → Netlify Functions
 [[redirects]]
-  from = "/api/auth/*"
-  to = "/.netlify/functions/auth/:splat"
+  from = "/api/auth/login"
+  to = "/.netlify/functions/auth-login"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/register"
+  to = "/.netlify/functions/auth-register"
   status = 200
 
 [[redirects]]
@@ -38,7 +41,6 @@
   to = "/.netlify/functions/applications"
   status = 200
 
-# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
