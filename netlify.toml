@@ -1,49 +1,21 @@
+# netlify.toml
 [build]
-  command = "CI= npm run build"
-  publish = "build"
+  command = "npm run build"
   functions = "netlify/functions"
+  publish = "build"
 
-[dev]
-  command = "npm start"
-  targetPort = 3000
-  port = 8888
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["mongoose", "bcryptjs", "jsonwebtoken"]
 
+# Redirect all /api/* requests to Netlify Functions
 [[redirects]]
-  from = "/api/auth/login"
-  to = "/.netlify/functions/auth-login"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
   force = true
 
-[[redirects]]
-  from = "/api/auth/register"
-  to = "/.netlify/functions/auth-register"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/upload"
-  to = "/.netlify/functions/upload"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/files/*"
-  to = "/.netlify/functions/files/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/applications/*"
-  to = "/.netlify/functions/applications/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/applications"
-  to = "/.netlify/functions/applications"
-  status = 200
-  force = true
-
+# Handle React Router (SPA)
 [[redirects]]
   from = "/*"
   to = "/index.html"

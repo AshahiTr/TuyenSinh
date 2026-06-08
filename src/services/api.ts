@@ -1,3 +1,4 @@
+// src/services/api.ts
 import universityData from '../data/universities.json';
 
 export interface University {
@@ -22,10 +23,33 @@ export interface SubjectGroup {
 
 const MOCK_UNIVERSITIES: University[] = universityData as University[];
 
-// Sử dụng đường dẫn tương đối để hoạt động cả trên local lẫn Netlify.
-// Trên local với `netlify dev`: proxy qua /.netlify/functions/...
-// Trên Netlify production: redirect rules trong netlify.toml chuyển /api/* → functions
-const BASE_URL = '/api';
+// Xác định base URL dựa trên môi trường
+const getBaseUrl = () => {
+  // Trên Netlify production hoặc preview
+  if (window.location.hostname !== 'localhost' && !window.location.hostname.includes('127.0.0.1')) {
+    return '/api';
+  }
+  // Trên local development với netlify dev
+  return '/api';
+};
+
+const BASE_URL = getBaseUrl();
+
+// Helper function để xử lý response
+const handleResponse = async (response: Response) => {
+  if (!response.ok) {
+    let errorMessage = `HTTP ${response.status}`;
+    try {
+      const errorData = await response.json();
+      errorMessage = errorData.message || errorData.error || errorMessage;
+    } catch {
+      // Nếu không parse được JSON
+      errorMessage = await response.text().catch(() => errorMessage);
+    }
+    throw new Error(errorMessage);
+  }
+  return response.json();
+};
 
 export const api = {
   async getUniversities(): Promise<University[]> {
@@ -41,16 +65,15 @@ export const api = {
 
   // Đăng nhập
   async login(email: string, password: string): Promise<{ user: any; token: string }> {
+    console.log('Calling login API:', `${BASE_URL}/auth/login`);
+    
     const response = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.message || err.error || 'Đăng nhập thất bại!');
-    }
-    return response.json();
+    
+    return handleResponse(response);
   },
 
   // Đăng ký
@@ -62,28 +85,28 @@ export const api = {
     dob: string;
     idCard: string;
   }): Promise<{ user: any; token: string }> {
+    console.log('Calling register API:', `${BASE_URL}/auth/register`);
+    
     const response = await fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.message || err.error || 'Đăng ký thất bại!');
-    }
-    return response.json();
+    
+    return handleResponse(response);
   },
 
   // Upload file lên MongoDB Atlas qua Netlify Function
   async uploadFile(file: File): Promise<any> {
     const formData = new FormData();
     formData.append('file', file);
+    
     const response = await fetch(`${BASE_URL}/upload`, {
       method: 'POST',
       body: formData,
     });
-    if (!response.ok) throw new Error('Upload failed');
-    return response.json();
+    
+    return handleResponse(response);
   },
 
   // Lưu hồ sơ vào MongoDB Atlas
@@ -93,18 +116,37 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || 'Submit failed');
-    }
-    return response.json();
+    
+    return handleResponse(response);
   },
 
   // Lấy danh sách hồ sơ từ MongoDB Atlas
   async getApplications(userId: string): Promise<any[]> {
     const response = await fetch(`${BASE_URL}/applications/${userId}`);
-    if (!response.ok) throw new Error('Fetch failed');
-    return response.json();
+    return handleResponse(response);
+  },
+
+  // Lấy tất cả hồ sơ (cho admin)
+  async getAllApplications(): Promise<any[]> {
+    const response = await fetch(`${BASE_URL}/applications`);
+    return handleResponse(response);
+  },
+
+  // Cập nhật trạng thái hồ sơ
+  async updateApplicationStatus(applicationId: string, status: string, note?: string): Promise<any> {
+    const response = await fetch(`${BASE_URL}/applications/${applicationId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, note }),
+    });
+    
+    return handleResponse(response);
+  },
+
+  // Health check
+  async healthCheck(): Promise<any> {
+    const response = await fetch(`${BASE_URL}/health`);
+    return handleResponse(response);
   },
 };
 
