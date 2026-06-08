@@ -15,31 +15,37 @@
   from = "/api/auth/login"
   to = "/.netlify/functions/auth-login"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/auth/register"
   to = "/.netlify/functions/auth-register"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/upload"
   to = "/.netlify/functions/upload"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/files/*"
   to = "/.netlify/functions/files/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/applications/*"
   to = "/.netlify/functions/applications/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/applications"
   to = "/.netlify/functions/applications"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
