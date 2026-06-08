@@ -1,0 +1,84 @@
+[
+  {
+    "id": "u1",
+    "name": "Học viện Bưu chính Viễn thông",
+    "majors": [
+      {
+        "id": "u1_m1",
+        "name": "Công nghệ thông tin",
+        "code": "7480201",
+        "quota": 500,
+        "subjectGroups": [
+          { "id": "u1_m1_sg1", "code": "A00", "subjects": ["Toán", "Lý", "Hóa"] },
+          { "id": "u1_m1_sg2", "code": "A01", "subjects": ["Toán", "Lý", "Anh"] }
+        ]
+      },
+      {
+        "id": "u1_m2",
+        "name": "Kỹ thuật viễn thông",
+        "code": "7520208",
+        "quota": 300,
+        "subjectGroups": [
+          { "id": "u1_m2_sg1", "code": "A00", "subjects": ["Toán", "Lý", "Hóa"] },
+          { "id": "u1_m2_sg2", "code": "A01", "subjects": ["Toán", "Lý", "Anh"] }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "id": "u2",
+    "name": "Đại học Bách Khoa Hà Nội",
+    "majors": [
+      {
+        "id": "u2_m1",
+        "name": "Khoa học máy tính",
+        "code": "7480101",
+        "quota": 200,
+        "subjectGroups": [
+          { "id": "u2_m1_sg1", "code": "A00", "subjects": ["Toán", "Lý", "Hóa"] },
+          { "id": "u2_m1_sg2", "code": "A01", "subjects": ["Toán", "Lý", "Anh"] }
+        ]
+      },
+      {
+        "id": "u2_m2",
+        "name": "Kỹ thuật điện tử viễn thông",
+        "code": "7520208",
+        "quota": 300,
+        "subjectGroups": [
+          { "id": "u2_m2_sg1", "code": "A00", "subjects": ["Toán", "Lý", "Hóa"] },
+          { "id": "u2_m2_sg2", "code": "A01", "subjects": ["Toán", "Lý", "Anh"] }
+        ]
+      }
+    ]
+  },
+
+
+   {
+    "id": "u3",
+    "name": "Trường Đại học Công nghệ - Đại học Quốc gia Hà Nội",
+    "majors": [
+      {
+        "id": "u3_m1",
+        "name": "Công nghệ thông tin",
+        "code": "7480201",
+        "quota": 500,
+        "subjectGroups": [
+          { "id": "u3_m1_sg1", "code": "A00", "subjects": ["Toán", "Lý", "Hóa"] },
+          { "id": "u3_m1_sg2", "code": "A01", "subjects": ["Toán", "Lý", "Anh"] }
+        ]
+      },
+      {
+        "id": "u3_m2",
+        "name": "Kỹ thuật viễn thông",
+        "code": "7520208",
+        "quota": 300,
+        "subjectGroups": [
+          { "id": "u3_m2_sg1", "code": "A00", "subjects": ["Toán", "Lý", "Hóa"] },
+          { "id": "u3_m2_sg2", "code": "A01", "subjects": ["Toán", "Lý", "Anh"] }
+        ]
+      }
+    ]
+  }
+]
