@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {
   Table, Tag, Card, Typography, Button, Modal, Descriptions,
-  Badge, Space, Select, Empty, Row, Col, Statistic, Tooltip,
-  List, Avatar,
+  Badge, Space, Select, Empty, Row, Col, Statistic, List,
 } from 'antd';
 import {
   EyeOutlined, FileTextOutlined, ClockCircleOutlined,

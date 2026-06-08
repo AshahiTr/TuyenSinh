@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Form, Input, Button, Card, Typography, Divider, message, Space, Checkbox,
+  Form, Input, Button, Card, Typography, Divider, message, Checkbox,
 } from 'antd';
 import {
   UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone,

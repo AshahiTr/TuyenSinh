@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Row, Col, Card, Statistic, Button, Typography, Tag, List, Avatar,
-  Empty, Timeline, Badge, Space,
+  Empty, Timeline, Space,
 } from 'antd';
 import {
   FileTextOutlined, CheckCircleOutlined, CloseCircleOutlined,

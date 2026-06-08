@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Form, Input, Button, Card, Typography, Result, Tag, Descriptions,
-  Row, Col, Divider, Alert, Space, Steps,
-} from 'antd';
+import { Form, Input, Button, Card, Typography, Result, Tag,
+  Row, Col, Divider, Alert, Space } from 'antd';
 import {
   SearchOutlined, FileTextOutlined, CheckCircleOutlined,
   CloseCircleOutlined, ClockCircleOutlined, TrophyOutlined,

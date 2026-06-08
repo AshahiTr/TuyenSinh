@@ -67,7 +67,7 @@ const ApplicationForm: React.FC = () => {
         dob: user.dob ? dayjs(user.dob) : undefined,
       });
     }
-  }, [user]);
+  }, [user, form]);
 
   const handleUniversityChange = async (uniId: string) => {
     form.setFieldsValue({ majorId: undefined, subjectGroupId: undefined });
